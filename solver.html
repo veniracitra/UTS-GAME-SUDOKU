@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=no">
+        <title>SUDOKU</title>
+
+        <link rel="stylesheet" href="sudoku.css">
+        <script>
+ //Mendeklarasikan variabel           
+var numSelected = null;
+var tileSelected = null;
+
+//Board sudoku yang akan dimainkan
+var board = [
+    "-4----5-3",
+    "3---4---2",
+    "-----61--",
+    "-7-9----6",
+    "-6-----5-",
+    "--3-6----",
+    "-----2--1",
+    "-3--7----",
+    "----1--3-"
+]
+
+//Jawaban atau Penyelesaian dari board sudoku 
+var solution = [
+    "847291563",
+    "316547982",
+    "529386174",
+    "274958316",
+    "968123457",
+    "153764829",
+    "695832741",
+    "431675298",
+    "782419635"
+]
+
+window.onload = function() {
+    setGame();
+}
+
+function setGame() {
+    //Digits 1-9
+    for (let i = 1; i<=9; i++) {
+        //<div id="1" class="number">1</div>
+        let number = document.createElement("div");
+        number.id = i
+        number.innerText = i;
+        number.addEventListener("click", selectNumber);
+        number.classList.add("number");
+        document.getElementById("digits").appendChild(number);
+    }
+
+    // Board 9x9
+    for (let r = 0; r < 9; r++) {
+        for (let c=0; c < 9; c++) {
+            let tile = document.createElement("div");
+            tile.id = r.toString() + "-" + c.toString();
+            
+                tile.innerText = solution[r][c];
+                tile.classList.add("tile-start");
+            //Membuat garis batasan board secara horizontal dan vertical
+            if (r == 2 || r == 5) {
+                tile.classList.add("horizontal-line");
+            }
+            if (c == 2 || c == 5) {
+                tile.classList.add("vertical-line");
+            }
+            tile.addEventListener("click", selectTile);
+            tile.classList.add("tile");
+            document.getElementById("board").append(tile);
+        }
+    }
+}
+
+function selectNumber(){
+    if (numSelected != null) {
+        numSelected.classList.remove("number-selected");
+    }
+}
+
+function selectTile() {
+    if (numSelected) {
+        if (this.innerText != "") {
+            return;
+        }
+
+        //"0-0" "0-1" .. "3-1"
+        let coords = this.id.split("-"); //["0", "0"]
+        let r = parseInt(coords[0]);
+        let c = parseInt(coords[1]);
+
+        if (solution[r][c] == numSelected.id) {
+            this.innerText = numSelected.id;
+        }
+    }
+}
+        </script>
+    </head>
+
+    <body>
+        <h1>SUDOKU</h1>
+       
+        <div class="btn">
+            <button><a href="sudoku.html">Back</a></button>
+           
+        </div>
+        <hr>
+        
+
+        <!-- 9x9 Board-->
+        <div id="board"></div>
+         <br>
+         <div id="digits"> </div>
+
+
+    </body>
+</html>
