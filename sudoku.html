@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=no">
+        <title>SUDOKU</title>
+
+        <link rel="stylesheet" href="sudoku.css">
+        <script src="sudoku.js"></script>
+    </head>
+
+    <body style="background-image: url('home.png');">
+        <h1 id="stitle">SUDOKU</h1>
+        <div class="btn">
+            <a href="home.html">Home</a>
+            <a onclick="window.location.reload()"> Clear All</a>
+            <a href="solver.html"> Solver </a>
+            <a onclick="submit()">Submit</a>
+            
+        </div>
+        <hr>
+        <h2 id="errors">0</h2>
+        
+
+        <!-- 9x9 Board-->
+        <div id="board"></div>
+         <br>
+         <div id="digits"> </div>
+         <br>
+         <div id="timee">Your time : <span id="time">00:00</span> minutes!</div>
+
+    </body>
+</html>
